@@ -247,7 +247,7 @@ dayjs()
           class="py-2 px-4 flex items-center cursor-pointer rounded-lg hover:bg-gray-100 dark:hover:bg-[#373f59]"
         >
           <img
-            src="/logos/uwublack.webp"
+            src="../../assets/uwublack.webp"
             class="w-6 h-6 rounded-full mr-3"
           />
           <div
