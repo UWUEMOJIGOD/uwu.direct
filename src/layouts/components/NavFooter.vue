@@ -15,7 +15,7 @@
         target="_blank"
         rel="noopener noreferrer"
         >Ping.pub</a
-      >
+      >&nbsp;
       Deployed  With&nbsp;
       🏴&nbsp;
       By&nbsp;
