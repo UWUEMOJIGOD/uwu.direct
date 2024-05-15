@@ -15,6 +15,16 @@
         target="_blank"
         rel="noopener noreferrer"
         >Ping.pub</a
+      >&nbsp;
+      Deployed  With&nbsp;
+      🏴&nbsp;
+      By&nbsp;
+      <a
+        class="link link-primary no-underline"
+        href="https://uwublk.market"
+        target="_blank"
+        rel="noopener noreferrer"
+        >UwUBlk.Market</a
       >
     </div>
     <div
@@ -22,13 +32,13 @@
     >
       <a
         class="link link-primary no-underline mr-4"
-        href="https://github.com/ping-pub/explorer/blob/master/LICENSE"
+        href="https://github.com/22a435/uwu.direct/blob/master/LICENSE"
         target="noopener noreferrer"
         >License</a
       >
       <a
         class="link link-primary no-underline"
-        href="https://github.com/ping-pub/explorer"
+        href="https://github.com/22a435/uwu.direct"
         target="noopener noreferrer"
         >Github</a
       >
