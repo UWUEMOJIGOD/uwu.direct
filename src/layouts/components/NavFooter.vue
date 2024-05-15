@@ -16,6 +16,16 @@
         rel="noopener noreferrer"
         >Ping.pub</a
       >
+      Deployed  With&nbsp;
+      🏴&nbsp;
+      By&nbsp;
+      <a
+        class="link link-primary no-underline"
+        href="https://uwublk.market"
+        target="_blank"
+        rel="noopener noreferrer"
+        >UwUBlk.Market</a
+      >
     </div>
     <div
       class="hidden md:!block"
