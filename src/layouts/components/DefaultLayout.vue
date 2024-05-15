@@ -228,14 +228,14 @@ dayjs()
           <div class="px-4 text-sm pt-2 text-gray-400 pb-2 uppercase">
             Tools
           </div>
-          <RouterLink to="/wallet/suggest"
+          <RouterLink to="/Unicorn/cosmwasm/0/transactions?contract=unicorn16jzpxp0e8550c9aht6q9svcux30vtyyyyxv5w2l2djjra46580wsl825uf"
           class="py-2 px-4 flex items-center cursor-pointer rounded-lg hover:bg-gray-100 dark:hover:bg-[#373f59]"
           >
             <Icon icon="mdi:frequently-asked-questions" class="text-xl mr-2" />
             <div
               class="text-base capitalize flex-1 text-gray-600 dark:text-gray-200"
             >
-              Wallet Helper
+              Meme Market Contract
             </div>
           </RouterLink>
           <div class="px-4 text-sm pt-2 text-gray-400 pb-2 uppercase">
