@@ -1,0 +1,226 @@
+
+{
+  "chain_name": "Unicorn",
+  "api": [
+    {
+      "address": "https://rest.unicorn.meme",
+      "provider": "Unicorn"
+    }
+  ],
+  "rpc": [
+    {
+      "address": "https://rpc.unicorn.meme",
+      "provider": "Unicorn"
+    }
+    
+  ],
+  "snapshot_provider": "",
+  "sdk_version": "0.45.10",
+  "coin_type": "118",
+  "min_tx_fee": "800",
+  "addr_prefix": "unicorn",
+  "logo": "/logos/uni-head.webp",
+  "theme_color": "#ff00ff",
+  "assets": [
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ubear",
+      "symbol": "ʕ·͡ᴥ·ʔ",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ubearhearth",
+      "symbol": "ʕっ•ᴥ•ʔっ❤️",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ublissful",
+      "symbol": "(｡◕‿‿◕｡)",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ublackflag",
+      "symbol": "🏴",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ublowfish",
+      "symbol": "🐡",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ucash",
+      "symbol": "💸",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ucat",
+      "symbol": "🐱",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/uchick",
+      "symbol": "🐤",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/uchina",
+      "symbol": "🇨🇳",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/uclown",
+      "symbol": "🤡",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ucorn",
+      "symbol": "🌽",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ucrystalball",
+      "symbol": "🔮",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/udiamond",
+      "symbol": "💎",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/udice",
+      "symbol": "🎲",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/udog",
+      "symbol": "🐶",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ueightball",
+      "symbol": "🎱",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/uenvelop",
+      "symbol": "✉️",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ufahrenheit",
+      "symbol": "🔥",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ugun",
+      "symbol": "▄︻デ══‐一♡",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/umeat",
+      "symbol": "🥩",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/umoon",
+      "symbol": "🌕",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/uorwell",
+      "symbol": "🐷",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/upaper",
+      "symbol": "📄",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/upeach",
+      "symbol": "🍑",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/upi",
+      "symbol": "🥧",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/uplaceholder",
+      "symbol": "placeholder",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/upoo",
+      "symbol": "💩",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/upretzel",
+      "symbol": "🥨",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/urock",
+      "symbol": "🪨",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/urocket",
+      "symbol": "🚀",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/usa",
+      "symbol": "🇺🇸",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/uscisors",
+      "symbol": "✂️",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ushrimp",
+      "symbol": "🦐",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/uskull",
+      "symbol": "💀",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/usushi",
+      "symbol": "🍣",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/utaco",
+      "symbol": "🌮",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/utaiwan",
+      "symbol": "🇹🇼",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/utest",
+      "symbol": "test",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/uwatermelon",
+      "symbol": "🍉",
+      "exponent": "6"
+    },
+    {
+      "base": "uwunicorn",
+      "symbol": "🦄",
+      "exponent": "6"
+    }
+  ]
+}
