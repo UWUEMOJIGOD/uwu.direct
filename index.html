@@ -263,7 +263,11 @@
       var params = new URLSearchParams(window.location.search);
       var d_in = params.get("d_in");
       var d_out = params.get("d_out");
-      var size = params.get("size")
+      var size = params.get("size");
+
+      d_in ??= "uwunicorn";
+      d_out ??= "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ublackflag";
+      size ??= "1000000";
 
       document.getElementById("size").value = size;
       const sup_res = await supply();
