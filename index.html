@@ -1,44 +1,365 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <link rel="icon" href="/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UwU Direct - Unicorn Blockchain Explorer And Web Wallet</title>
-    <meta name="description" content="UwU Direct is a block explorer/web wallet for the Unicorn meme-chain" />
-    <link rel="stylesheet" type="text/css" href="/loader.css" />    
-  </head>
-  <body>
-    <div id="app">
-      <div id="loading-bg">
-        <div class="loading-logo">
-          <img src="/uwublack.webp" alt="Logo" />
-        </div>
-        <div class="pre-loading">
-          <div class="effect-1 effects"></div>
-          <div class="effect-2 effects"></div>
-          <div class="effect-3 effects"></div>
-        </div>
-      </div>
-    </div>
-    <script type="module" src="/src/main.ts"></script>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SSBKVF3GMX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      // Set default consent to 'denied' as a placeholder
-      // Determine actual values based on your own requirements
-      gtag('consent', 'default', {
-        'ad_storage': 'denied',
-        'ad_user_data': 'denied',
-        'ad_personalization': 'denied',
-        'analytics_storage': 'denied'
-      });
-      gtag('config', 'G-SSBKVF3GMX');
-    </script>
-    <script type="module" src="https://cdn.jsdelivr.net/npm/ping-widget@latest/dist/ping-widget.min.js"></script>
+<!-- 🏴🏴🏴🏴🏴🏴🏴🏴 -->
+<!-- mkdir blackmarket -->
+<!-- cd blackmarket -->
+<!-- {download latest from https://gist.github.com/UnityChaos/f992bd24b6a8b1aae00ed49699321d8a }-->
+<!-- python3 -m http.server 8000 -->
+<!-- -->
+<!-- open link in browser -->
+<!-- http://127.0.0.1:8000/?d_in=uwunicorn&d_out=factory%2Funicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty%2Fublackflag&size=1000000 -->
+<!-- (swaps 1 unicorn for blackflag)-->
+<!-- extremely alpha software and illiquid markets. yolo with care -->
+<!-- report bugs and request features / UI/UX improvements to prioritize in -->
+<!-- http://t.me/unicorn_black_market -->
+<!-- 🏴🏴🏴🏴🏴🏴🏴🏴 -->
+<html>
+<meta charset="UTF-8">
+<style>
+    table,
+    th,
+    td {
+        border: 1px solid black;
+        margin-left: auto;
+        margin-right: auto
+    }
+</style>
 
-  </body>
+<head>
+    <script>
+        (function () { var PREFIXES = { 24: "Sp", 21: "Sx", 18: "Qn", 15: "Qd", 12: "T", 9: "B", 6: "M", 3: "k", 0: "", "-3": "m", "-6": "µ", "-9": "n", "-12": "p", "-15": "f", "-18": "a", "-21": "z", "-24": "y" }; function getExponent(n) { if (n === 0) { return 0 } return Math.floor(Math.log10(Math.abs(n))) } function precise(n) { return Number.parseFloat(n.toPrecision(3)) } function toHumanString(sn) { var n = precise(Number.parseFloat(sn)); var e = Math.max(Math.min(3 * Math.floor(getExponent(n) / 3), 24), -24); return precise(n / Math.pow(10, e)).toString() + PREFIXES[e] } var HRNumbers = { toHumanString: toHumanString }; if (typeof define == "function" && define.amd) { define([], function () { return HRNumbers }) } else if (typeof exports != "undefined") { exports = module.exports = HRNumbers } else { this.HRNumbers = HRNumbers } }).call(this);
+    </script>
+    <script>
+        var pf = new Intl.NumberFormat(options = { "style": "percent" });
+        const sizeRatio = 0.20;
+        // var balances = {};
+        const balances_ = new Map();
+        const pairs_ = new Map();
+        // var hrn;
+        var client;
+        var stargate;
+        var walletAddress;
+        var cosmwasm_stargate;
+        var stargate;
+        var tx_types;
+        const chainId = "unicorn-420"
+        const rest = "https://rest.unicorn.meme";
+        const rpc = "https://rpc.unicorn.meme";
+        const bank = "/cosmos/bank/v1beta1/";
+        const wasm = "/cosmwasm/wasm/v1/contract/";
+        const router = "unicorn16jzpxp0e8550c9aht6q9svcux30vtyyyyxv5w2l2djjra46580wsl825uf";
+        const factory = "unicorn1yvgh8xeju5dyr0zxlkvq09htvhjj20fncp5g58np4u25g8rkpgjslkfelc";
+        const devliq = "unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty";
+        const emoji = {
+            "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ubear": "ʕ·͡ᴥ·ʔ",
+            "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ubearhearth": "ʕっ•ᴥ•ʔっ❤️",
+            "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ublackflag": "🏴",
+            "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ublissful": "(｡◕‿‿◕｡)",
+            "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ublowfish": "🐡",
+            "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ucash": "💸",
+            "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ucat": "🐱",
+            "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/uchick": "🐤",
+            "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/uchina": "🇨🇳",
+            "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/uclown": "🤡",
+            "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ucorn": "🌽",
+            "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ucrystalball": "🔮",
+            "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/udiamond": "💎",
+            "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/udice": "🎲",
+            "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/udog": "🐶",
+            "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ueightball": "🎱",
+            "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/uenvelop": "✉️",
+            "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ufahrenheit": "🔥",
+            "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ugun": "▄︻デ══‐一♡",
+            "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/umeat": "🥩",
+            "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/umoon": "🌕",
+            "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/uorwell": "🐷",
+            "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/upaper": "📄",
+            "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/upeach": "🍑",
+            "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/upi": "🥧",
+            "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/uplaceholder": "placeholder",
+            "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/upoo": "💩",
+            "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/upretzel": "🥨",
+            "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/urock": "🪨",
+            "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/urocket": "🚀",
+            "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/usa": "🇺🇸",
+            "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/uscisors": "✂️",
+            "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ushrimp": "🦐",
+            "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/uskull": "💀",
+            "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/usushi": "🍣",
+            "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/utaco": "🌮",
+            "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/utaiwan": "🇹🇼",
+            "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/utest": "test",
+            "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/uwatermelon": "🍉",
+            "uwunicorn": "🦄"
+        };
+        function suggest(sup_res) {
+            const cur = sup_res.map((sup) => {
+                return {
+                    coinMinimalDenom: sup.denom,
+                    coinDenom: emoji[sup.denom],
+                    coinDecimals: 6
+                };
+            })
+            return window.leap.experimentalSuggestChain({
+                chainId: chainId,
+                chainName: "unicorn",
+                rest: rest,
+                rpc: rpc,
+                bip44: {
+                    coinType: 118,
+                },
+                bech32Config: {
+                    bech32PrefixAccAddr: "unicorn",
+                    bech32PrefixAccPub: "unicorn" + "pub",
+                    bech32PrefixValAddr: "unicorn" + "valoper",
+                    bech32PrefixValPub: "unicorn" + "valoperpub",
+                    bech32PrefixConsAddr: "unicorn" + "valcons",
+                    bech32PrefixConsPub: "unicorn" + "valconspub",
+                },
+                currencies: cur,
+                feeCurrencies: [
+                    {
+                        coinDenom: "🦄",
+                        coinMinimalDenom: "uwunicorn",
+                        coinDecimals: 6,
+                        gasPriceStep: {
+                            low: 0.01,
+                            average: 0.025,
+                            high: 0.04,
+                        },
+                    },
+                ],
+                stakeCurrency: {
+                    coinDenom: "🦄",
+                    coinMinimalDenom: "uwunicorn",
+                    coinDecimals: 6
+                },
+                features: ["cosmwasm"]
+            });
+        }
+        async function supply() {
+            const res = await fetch(rest + bank + "supply?pagination.limit=100");
+            const tx = await res.text();
+            return JSON.parse(tx).supply;
+        }
+        async function get_balance(address, denom) {
+            var adrbal;
+            if (address in balances_) { adrbal = balances_[address]; } else {
+                const res = await fetch(rest + bank + "balances/" + address);
+                const tx = await res.text();
+                adrbal = new Map();
+                JSON.parse(tx).balances.forEach(b => {
+                    adrbal.set(b.denom, parseInt(b.amount) / 1000000);
+                });
+                balances_.set(address, adrbal);
+            }
+            if (adrbal.has(denom)) { return adrbal.get(denom); } else { return 0; }
+        }
+        async function price(denom) {
+            var p = await get_pair(denom);
+            var ubal = await get_balance(p, "uwunicorn");
+            var dbal = await get_balance(p, denom);
+            return ubal / dbal;
+        }
+        async function get_pair(denom) {
+            if (pairs_.has(denom)) {
+                return pairs_.get(denom);
+            } else {
+                const res = await fetch(rest + wasm + factory + "/smart/" + btoa(JSON.stringify({
+                    "pair": {
+                        "asset_infos": [
+                            { "native_token": { "denom": denom } },
+                            { "native_token": { "denom": "uwunicorn" } }
+                        ]
+                    }
+                })));
+                const tx = await res.text();
+                const p = JSON.parse(tx).data.contract_addr;
+                pairs_.set(denom, p);
+                return p;
+            }
+        }
+        async function tvl(denom) {
+            var p = await get_pair(denom);
+            var res = await get_balance(p, "uwunicorn");
+            return res;
+        }
+        async function info(addr, sup) {
+            var d = sup.denom;
+            var s = parseInt(sup.amount) / 1000000;
+            var b = await get_balance(addr, d);
+            var not_circ = await get_balance(devliq, d);
+            var circ = s - not_circ;
+            // balances[d] = b;
+            var r = b / circ;
+            if (d == "uwunicorn") {
+                return {
+                    "denom": "uwunicorn",
+                    "emoji": "🦄",
+                    "supply": s,
+                    "circ": s,
+                    "mcap": s,
+                    "fdv": s,
+                    "tvl": 0,
+                    "liq": 0,
+                    "price": 1,
+                    "balance": b,
+                    "share": r,
+                    "value": b
+                };
+            } else {
+                var t = await tvl(d)
+                var p = await price(d);
+                return {
+                    "denom": d,
+                    "emoji": emoji[d],
+                    "supply": s,
+                    "circ": circ,
+                    "mcap": (p * circ),
+                    "fdv": (p * s),
+                    "tvl": await tvl(d),
+                    "liq": t / (p * circ),
+                    "price": p,
+                    "balance": b,
+                    "share": r,
+                    "value": (b * p)
+                }
+            }
+        }
+
+        async function swap(d_in, d_out, size) {
+            alert("test swap please ignore");
+            var msg = {
+                "execute_swap_operations": {
+                    "max_spread": "0.5",
+                    "minimum_receive": "1",
+                    "operations": [{
+                        "astro_swap": {
+                            "offer_asset_info": { "native_token": { "denom": d_in } },
+                            "ask_asset_info": { "native_token": { "denom": d_out } }
+                        }
+                    }]
+                }
+            };
+            var res = await client.execute(walletAddress, router, msg, "auto", "", [{
+                denom: d_in, amount: size
+            }]);
+            alert("https://rpc.unicorn.meme/tx?hash="+res.transactionHash);
+        }
+
+        async function loadClient() {
+            await window.leap.enable(chainId);
+            cosmwasm_stargate = await import("https://esm.run/@cosmjs/cosmwasm-stargate@0.27.0");
+            stargate = await import("https://esm.run/@cosmjs/stargate@0.27.0");
+            proto_signing = await import("https://esm.run/@cosmjs/proto-signing@0.27.0");
+            tx_types = await import("https://esm.run/cosmjs-types/cosmwasm/wasm/v1/tx");
+            const offlineSigner = await window.leap.getOfflineSignerAuto(chainId);
+            const accounts = await offlineSigner.getAccounts();
+            client = await cosmwasm_stargate.SigningCosmWasmClient.connectWithSigner(
+                rpc,
+                offlineSigner,
+                {gasPrice: stargate.GasPrice.fromString("0.001uwunicorn")}
+            )
+        }
+        window.onload = async () => {
+            var params = new URLSearchParams(window.location.search);
+            var d_in = params.get("d_in");
+            var d_out = params.get("d_out");
+            var size = params.get("size")
+
+            document.getElementById("size").value = size;
+            const sup_res = await supply();
+            await suggest(sup_res);
+            await loadClient();
+            var key = await window.leap.getKey(chainId);
+            walletAddress = key.bech32Address;
+            await get_balance(walletAddress, "uwunicorn");
+            await get_balance(devliq, "uwunicorn");
+            var infos = await Promise.all(sup_res.map((x) => info(key.bech32Address, x)));
+            infos.sort((a, b) => b.tvl - a.tvl);
+            const insel = document.getElementById("inselector");
+            const outsel = document.getElementById("outselector");
+            const market = document.getElementById("market");
+            infos.forEach(i => {
+
+                var inopt = document.createElement("option");
+                inopt.value = i.denom;
+                if (i.denom == d_in) {
+                    inopt.selected = "selected";
+                }
+                inopt.innerHTML = emoji[i.denom];
+                insel.appendChild(inopt);
+
+                var outopt = document.createElement("option");
+                outopt.value = i.denom;
+                if (i.denom == d_out) {
+                    outopt.selected = "selected";
+                }
+                outopt.innerHTML = emoji[i.denom];
+                outsel.appendChild(outopt);
+
+                let row = market.insertRow();
+                // row.insertCell(0).innerHTML = i.denom;
+                row.insertCell(0).innerHTML = i.emoji;
+                row.insertCell(1).innerHTML = HRNumbers.toHumanString(i.supply);
+                row.insertCell(2).innerHTML = HRNumbers.toHumanString(i.circ);
+
+                row.insertCell(3).innerHTML = HRNumbers.toHumanString(i.mcap);
+                row.insertCell(4).innerHTML = HRNumbers.toHumanString(i.fdv);
+                row.insertCell(5).innerHTML = HRNumbers.toHumanString(i.tvl);
+                row.insertCell(6).innerHTML = i.liq.toLocaleString(undefined,{style: 'percent', minimumFractionDigits:3 });
+                row.insertCell(7).innerHTML = i.price.toLocaleString(undefined,{ minimumSignificantDigits:3, maximumSignificantDigits:5});
+
+                row.insertCell(8).innerHTML = HRNumbers.toHumanString(i.balance);
+                row.insertCell(9).innerHTML = i.share.toLocaleString(undefined,{style: 'percent', minimumFractionDigits:3 });
+                row.insertCell(10).innerHTML = HRNumbers.toHumanString(i.value);
+
+            });
+
+            
+
+            await swap(d_in, d_out, size);
+        }
+
+    </script>
+</head>
+
+<body>
+    <table id="terminal">
+        <thead>
+            <tr>
+                <th>In</th>
+                <th>Out</th>
+                <th>Size (in uwunicorn / use 1000000x) </th>
+                <th>Send It</th>
+            </tr>
+        </thead>
+        <tr>
+            <form action="/">
+                <td><select name="d_in" id="inselector"></select></td>
+                <td><select name="d_out" id="outselector"></select></td>
+                <td><input name="size" id="size" default="0"></input></td>
+                <td><button id="sendit">✅</button></td>
+            </form>
+        </tr>
+    </table>
+    <table id="market">
+        <thead>
+            <tr>
+                <!-- <th>Base Denom</th> -->
+                <th>Emoji</th>
+                <th>Supply</th>
+                <th>Circ</th>
+                <th>MCap (🦄)</th>
+                <th>FDV (🦄)</th>
+                <th>TVL (🦄)</th>
+                <th>Liq (TVL/MCap)</th>
+                <th>Price (🦄)</th>
+                <th>Balance</th>
+                <th>Share (Bal/Circ)</th>
+                <th>Value (🦄)</th>
+            </tr>
+        </thead>
+    </table>
+</body>
+
 </html>
