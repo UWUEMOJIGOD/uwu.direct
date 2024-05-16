@@ -12,7 +12,7 @@
 <a href=http://t.me/unicorn_black_market>join the telegram</a>
 ## Donation
 
-Gib spare 🦄 and memes to support the 🏴 crew 
+🥺 Gib spare 🦄 and memes to support the 🏴 crew 🙏
 
 ```
 unicorn1z0ux6q9qw0xjhhy86wgevy8u4zd5nvhjy78fsd
