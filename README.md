@@ -18,3 +18,12 @@
 unicorn1z0ux6q9qw0xjhhy86wgevy8u4zd5nvhjy78fsd
 ```
 
+🤔 Can also give actual money and NFTs I guess... if you're into that sorta thing ¯\\\_(ツ)_/¯
+```
+osmo1z0ux6q9qw0xjhhy86wgevy8u4zd5nvhj2zeg53
+```
+```
+uwublkmarket.stars
+stars1z0ux6q9qw0xjhhy86wgevy8u4zd5nvhjk9a9fj
+```
+
