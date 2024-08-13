@@ -23,6 +23,11 @@
   "theme_color": "#ff00ff",
   "assets": [
     {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ualien",
+      "symbol": "👽",
+      "exponent": "6"
+    },
+    {
       "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ubear",
       "symbol": "ʕ·͡ᴥ·ʔ",
       "exponent": "6"
@@ -55,6 +60,11 @@
     {
       "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ucat",
       "symbol": "🐱",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/uchains",
+      "symbol": "🙂⛓️",
       "exponent": "6"
     },
     {
@@ -98,6 +108,11 @@
       "exponent": "6"
     },
     {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ueggplant",
+      "symbol": "🍆",
+      "exponent": "6"
+    },
+    {
       "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ueightball",
       "symbol": "🎱",
       "exponent": "6"
@@ -113,6 +128,11 @@
       "exponent": "6"
     },
     {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ufrog",
+      "symbol": "🐸",
+      "exponent": "6"
+    },
+    {
       "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ugun",
       "symbol": "▄︻デ══‐一♡",
       "exponent": "6"
@@ -120,6 +140,11 @@
     {
       "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/umeat",
       "symbol": "🥩",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/umog",
+      "symbol": "😹",
       "exponent": "6"
     },
     {
@@ -135,6 +160,11 @@
     {
       "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/upaper",
       "symbol": "📄",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/upeace",
+      "symbol": "🌎☮️",
       "exponent": "6"
     },
     {
@@ -163,6 +193,11 @@
       "exponent": "6"
     },
     {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/uretard",
+      "symbol": "🫵🤡",
+      "exponent": "6"
+    },
+    {
       "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/urock",
       "symbol": "🪨",
       "exponent": "6"
@@ -180,6 +215,11 @@
     {
       "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/uscisors",
       "symbol": "✂️",
+      "exponent": "6"
+    },
+    {
+      "base": "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ushot",
+      "symbol": "💉🧬",
       "exponent": "6"
     },
     {
