@@ -301,7 +301,7 @@
                 var p = await price(d);
                 return {
                     "denom": d,
-                    "emoji": emoji[d],
+                    "emoji": emoji[d] ? emoji[d] : d,
                     "supply": s,
                     "circ": circ,
                     "mcap": (p * circ),
@@ -382,7 +382,7 @@
                 if (i.denom == d_in) {
                     inopt.selected = "selected";
                 }
-                inopt.innerHTML = emoji[i.denom];
+                inopt.innerHTML = emoji[i.denom] ? emoji[i.denom] : i.denom;
                 insel.appendChild(inopt);
 
                 var outopt = document.createElement("option");
@@ -390,7 +390,7 @@
                 if (i.denom == d_out) {
                     outopt.selected = "selected";
                 }
-                outopt.innerHTML = emoji[i.denom];
+                outopt.innerHTML = emoji[i.denom] ? emoji[i.denom] : i.denom;
                 outsel.appendChild(outopt);
 
                 let row = market.insertRow();
