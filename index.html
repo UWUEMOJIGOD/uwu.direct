@@ -233,13 +233,18 @@
             if (!lpadrs_.has(d)) {
                 await get_pair(d);
             }
-            const lp = lpadrs_.get(d);
-            const res = await fetch(rest + wasm + lp + "/smart/" + btoa(JSON.stringify({
-                "balance":{"address":a}
-            })));
-            const tx = await res.text();
-            const j = JSON.parse(tx);
-            return parseInt(j.data.balance);
+            try {
+                const lp = lpadrs_.get(d);
+                const res = await fetch(rest + wasm + lp + "/smart/" + btoa(JSON.stringify({
+                    "balance":{"address":a}
+                })));
+                const tx = await res.text();
+                const j = JSON.parse(tx);
+                return parseInt(j.data.balance);
+            } catch (error) {
+                console.log(error);
+                return 0;
+            }
         }
         async function get_total_lp(d) {
             const p = await get_pair(d);
