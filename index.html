@@ -271,7 +271,7 @@
             return res;
         }
         function disDenom(denom) {
-            return emoji[denom] ? emoji[denom] : denom;
+            return emoji[denom] ? emoji[denom] : denom.substring(denom.lastIndexOf('/')+1);
         }
         async function info(addr, sup) {
             var d = sup.denom;
