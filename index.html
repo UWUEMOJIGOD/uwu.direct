@@ -104,7 +104,7 @@
             const cur = sup_res.map((sup) => {
                 return {
                     coinMinimalDenom: sup.denom,
-                    coinDenom: emoji[sup.denom],
+                    coinDenom: disDenom(sup.denom),
                     coinDecimals: 6
                 };
             })
@@ -189,13 +189,18 @@
         async function get_balance(address, denom) {
             var adrbal;
             if (address in balances_) { adrbal = balances_[address]; } else {
-                const res = await fetch(rest + bank + "balances/" + address);
-                const tx = await res.text();
                 adrbal = new Map();
-                JSON.parse(tx).balances.forEach(b => {
-                    adrbal.set(b.denom, parseInt(b.amount) / 1000000);
-                });
-                balances_.set(address, adrbal);
+
+                try {
+                    const res = await fetch(rest + bank + "balances/" + address);
+                    const tx = await res.text();
+                    JSON.parse(tx).balances.forEach(b => {
+                        adrbal.set(b.denom, parseInt(b.amount) / 1000000);
+                    });
+                    balances_.set(address, adrbal);
+                } catch (error) {
+                    console.log(error)
+                }
             }
             if (adrbal.has(denom)) { return adrbal.get(denom); } else { return 0; }
         }
@@ -207,48 +212,66 @@
         }
         async function get_pair(denom) {
             if (pairs_.has(denom)) { return pairs_.get(denom); } else {
-                const res = await fetch(rest + wasm + factory + "/smart/" + btoa(JSON.stringify({
-                    "pair": {
-                        "asset_infos": [
-                            { "native_token": { "denom": denom } },
-                            { "native_token": { "denom": "uwunicorn" } }
-                        ]
-                    }
-                })));
-                const tx = await res.text();
-                const j = JSON.parse(tx);
-                const p = j.data.contract_addr;
-                const lp = j.data.liquidity_token;
-                pairs_.set(denom, p);
-                lpadrs_.set(denom, lp)
-                return p;
+                try {
+                    const res = await fetch(rest + wasm + factory + "/smart/" + btoa(JSON.stringify({
+                        "pair": {
+                            "asset_infos": [
+                                { "native_token": { "denom": denom } },
+                                { "native_token": { "denom": "uwunicorn" } }
+                            ]
+                        }
+                    })));
+                    const tx = await res.text();
+                    const j = JSON.parse(tx);
+                    const p = j.data.contract_addr;
+                    const lp = j.data.liquidity_token;
+                    pairs_.set(denom, p);
+                    lpadrs_.set(denom, lp)
+                    return p;
+                } catch (error) {
+                    console.log(error)
+                    return ""
+                }
             }
         }
         async function get_lp(d, a) {
             if (!lpadrs_.has(d)) {
                 await get_pair(d);
             }
-            const lp = lpadrs_.get(d);
-            const res = await fetch(rest + wasm + lp + "/smart/" + btoa(JSON.stringify({
-                "balance":{"address":a}
-            })));
-            const tx = await res.text();
-            const j = JSON.parse(tx);
-            return parseInt(j.data.balance);
+            try {
+                const lp = lpadrs_.get(d);
+                const res = await fetch(rest + wasm + lp + "/smart/" + btoa(JSON.stringify({
+                    "balance":{"address":a}
+                })));
+                const tx = await res.text();
+                const j = JSON.parse(tx);
+                return parseInt(j.data.balance);
+            } catch (error) {
+                console.log(error);
+                return 0;
+            }
         }
         async function get_total_lp(d) {
             const p = await get_pair(d);
-            const res = await fetch(rest + wasm + p + "/smart/" + btoa(JSON.stringify({
-                "pool":{}
-            })));
-            const tx = await res.text();
-            const j = JSON.parse(tx);
-            return parseInt(j.data.total_share);  
+            try {
+                const res = await fetch(rest + wasm + p + "/smart/" + btoa(JSON.stringify({
+                    "pool":{}
+                })));
+                const tx = await res.text();
+                const j = JSON.parse(tx);
+                return parseInt(j.data.total_share);  
+            } catch (error) {
+                console.log(error)
+                return 0;
+            }
         }
         async function tvl(denom) {
             var p = await get_pair(denom);
             var res = await get_balance(p, "uwunicorn");
             return res;
+        }
+        function disDenom(denom) {
+            return emoji[denom] ? emoji[denom] : denom.substring(denom.lastIndexOf('/')+1);
         }
         async function info(addr, sup) {
             var d = sup.denom;
@@ -281,7 +304,7 @@
                 var p = await price(d);
                 return {
                     "denom": d,
-                    "emoji": emoji[d],
+                    "emoji": disDenom(d),
                     "supply": s,
                     "circ": circ,
                     "mcap": (p * circ),
@@ -362,7 +385,7 @@
                 if (i.denom == d_in) {
                     inopt.selected = "selected";
                 }
-                inopt.innerHTML = emoji[i.denom];
+                inopt.innerHTML = i.emoji;
                 insel.appendChild(inopt);
 
                 var outopt = document.createElement("option");
@@ -370,7 +393,7 @@
                 if (i.denom == d_out) {
                     outopt.selected = "selected";
                 }
-                outopt.innerHTML = emoji[i.denom];
+                outopt.innerHTML = i.emoji;
                 outsel.appendChild(outopt);
 
                 let row = market.insertRow();
