@@ -248,12 +248,17 @@
         }
         async function get_total_lp(d) {
             const p = await get_pair(d);
-            const res = await fetch(rest + wasm + p + "/smart/" + btoa(JSON.stringify({
-                "pool":{}
-            })));
-            const tx = await res.text();
-            const j = JSON.parse(tx);
-            return parseInt(j.data.total_share);  
+            try {
+                const res = await fetch(rest + wasm + p + "/smart/" + btoa(JSON.stringify({
+                    "pool":{}
+                })));
+                const tx = await res.text();
+                const j = JSON.parse(tx);
+                return parseInt(j.data.total_share);  
+            } catch (error) {
+                console.log(error)
+                return 0;
+            }
         }
         async function tvl(denom) {
             var p = await get_pair(denom);
