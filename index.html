@@ -207,21 +207,26 @@
         }
         async function get_pair(denom) {
             if (pairs_.has(denom)) { return pairs_.get(denom); } else {
-                const res = await fetch(rest + wasm + factory + "/smart/" + btoa(JSON.stringify({
-                    "pair": {
-                        "asset_infos": [
-                            { "native_token": { "denom": denom } },
-                            { "native_token": { "denom": "uwunicorn" } }
-                        ]
-                    }
-                })));
-                const tx = await res.text();
-                const j = JSON.parse(tx);
-                const p = j.data.contract_addr;
-                const lp = j.data.liquidity_token;
-                pairs_.set(denom, p);
-                lpadrs_.set(denom, lp)
-                return p;
+                try {
+                    const res = await fetch(rest + wasm + factory + "/smart/" + btoa(JSON.stringify({
+                        "pair": {
+                            "asset_infos": [
+                                { "native_token": { "denom": denom } },
+                                { "native_token": { "denom": "uwunicorn" } }
+                            ]
+                        }
+                    })));
+                    const tx = await res.text();
+                    const j = JSON.parse(tx);
+                    const p = j.data.contract_addr;
+                    const lp = j.data.liquidity_token;
+                    pairs_.set(denom, p);
+                    lpadrs_.set(denom, lp)
+                    return p;
+                } catch (error) {
+                    console.log(error)
+                    return ""
+                }
             }
         }
         async function get_lp(d, a) {
