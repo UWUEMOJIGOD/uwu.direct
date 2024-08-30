@@ -104,7 +104,7 @@
             const cur = sup_res.map((sup) => {
                 return {
                     coinMinimalDenom: sup.denom,
-                    coinDenom: emoji[sup.denom],
+                    coinDenom: disDenom(sup.denom),
                     coinDecimals: 6
                 };
             })
@@ -270,6 +270,9 @@
             var res = await get_balance(p, "uwunicorn");
             return res;
         }
+        function disDenom(denom) {
+            return emoji[denom] ? emoji[denom] : denom.split("/")[-1];
+        }
         async function info(addr, sup) {
             var d = sup.denom;
             var s = parseInt(sup.amount) / 1000000;
@@ -301,7 +304,7 @@
                 var p = await price(d);
                 return {
                     "denom": d,
-                    "emoji": emoji[d] ? emoji[d] : d,
+                    "emoji": disDenom(d),
                     "supply": s,
                     "circ": circ,
                     "mcap": (p * circ),
@@ -382,7 +385,7 @@
                 if (i.denom == d_in) {
                     inopt.selected = "selected";
                 }
-                inopt.innerHTML = emoji[i.denom] ? emoji[i.denom] : i.denom;
+                inopt.innerHTML = i.emoji;
                 insel.appendChild(inopt);
 
                 var outopt = document.createElement("option");
@@ -390,7 +393,7 @@
                 if (i.denom == d_out) {
                     outopt.selected = "selected";
                 }
-                outopt.innerHTML = emoji[i.denom] ? emoji[i.denom] : i.denom;
+                outopt.innerHTML = i.emoji;
                 outsel.appendChild(outopt);
 
                 let row = market.insertRow();
