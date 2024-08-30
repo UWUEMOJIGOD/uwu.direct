@@ -189,13 +189,18 @@
         async function get_balance(address, denom) {
             var adrbal;
             if (address in balances_) { adrbal = balances_[address]; } else {
-                const res = await fetch(rest + bank + "balances/" + address);
-                const tx = await res.text();
                 adrbal = new Map();
-                JSON.parse(tx).balances.forEach(b => {
-                    adrbal.set(b.denom, parseInt(b.amount) / 1000000);
-                });
-                balances_.set(address, adrbal);
+
+                try {
+                    const res = await fetch(rest + bank + "balances/" + address);
+                    const tx = await res.text();
+                    JSON.parse(tx).balances.forEach(b => {
+                        adrbal.set(b.denom, parseInt(b.amount) / 1000000);
+                    });
+                    balances_.set(address, adrbal);
+                } catch (error) {
+                    console.log(error)
+                }
             }
             if (adrbal.has(denom)) { return adrbal.get(denom); } else { return 0; }
         }
