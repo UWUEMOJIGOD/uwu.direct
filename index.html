@@ -271,7 +271,7 @@
             return res;
         }
         function disDenom(denom) {
-            return emoji[denom] ? emoji[denom] : denom.split("/")[-1];
+            return emoji[denom] ? emoji[denom] : denom;
         }
         async function info(addr, sup) {
             var d = sup.denom;
