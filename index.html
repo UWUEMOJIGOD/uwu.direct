@@ -360,10 +360,18 @@
             var d_in = params.get("d_in");
             var d_out = params.get("d_out");
             var size = params.get("size")
-
+            
             d_in ??= "uwunicorn";
             d_out ??= "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ublackflag";
             size ??= "1000000";
+
+            var denom_m = params.get("denom_m");
+            var size_m = params.get("size_m");
+            var size_u = params.get("size_u");
+
+            denom_m ??= "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ublackflag"
+            size_m ??= 0
+            size_u ??= 0
 
             document.getElementById("size").value = size;
             const sup_res = await supply();
@@ -379,6 +387,7 @@
             infos.sort((a, b) => b.tvl - a.tvl);
             const insel = document.getElementById("inselector");
             const outsel = document.getElementById("outselector");
+            const lpsel = document.getElementById("lpselector");
             const market = document.getElementById("market");
             infos.forEach(i => {
                 var inopt = document.createElement("option");
@@ -396,6 +405,17 @@
                 }
                 outopt.innerHTML = i.emoji;
                 outsel.appendChild(outopt);
+
+                var lpopt = document.createElement("option");
+                lpopt.value = i.denom;
+                if (i.denom == denom_m) {
+                    lpopt.selected = "selected";
+                }
+                lpopt.innerHTML = i.emoji;
+                if (i.denom != "uwunicorn") {
+                    lpsel.appendChild(lpopt);
+                }
+                
 
                 let row = market.insertRow();
                 // row.insertCell(0).innerHTML = i.denom;
@@ -420,9 +440,9 @@
             });
             var hax = params.get("hax");
             if (hax == "prov") {
-                var denom_m = params.get("denom_m");
-                var size_m = params.get("size_m");
-                var size_u = params.get("size_u");
+                // var denom_m = params.get("denom_m");
+                // var size_m = params.get("size_m");
+                // var size_u = params.get("size_u");
                 await prov(denom_m, size_m, size_u);
             } else {
                 await swap(d_in, d_out, size);
@@ -433,7 +453,7 @@
             alert("test prov please ignore");
             var msg = {
                 "provide_liquidity": {
-                    "auto_stake": false,
+                    //"auto_stake": false,
                     "slippage_tolerance": "0.5",
                     "assets": [
                         {
@@ -461,8 +481,8 @@
     <table id="terminal">
         <thead>
             <tr>
-                <th>In</th>
-                <th>Out</th>
+                <th>Swap In</th>
+                <th>Swap Out</th>
                 <th>Size (in uwunicorn / use 1000000x) </th>
                 <th>Send It</th>
             </tr>
@@ -473,6 +493,25 @@
                 <td><select name="d_out" id="outselector"></select></td>
                 <td><input name="size" id="size" default="0"></input></td>
                 <td><button id="sendit">✅</button></td>
+            </form>
+        </tr>
+    </table>
+    <table id="terminal-lp">
+        <thead>
+            <tr>
+                <th>LP Emoji</th>
+                <th>Amount uMeme </th>
+                <th>Amount uwUnicorn </th>
+                <th>Send It</th>
+            </tr>
+        </thead>
+        <tr>
+            <form action="/">
+                <input type="hidden" id="hax" name="hax" value="prov">
+                <td><select name="denom_m" id="lpselector"></select></td>
+                <td><input name="size_m" id="size_m" default="0"></input></td>
+                <td><input name="size_u" id="size_u" default="0"></input></td>
+                <td><button id="provide">✅</button></td>
             </form>
         </tr>
     </table>
