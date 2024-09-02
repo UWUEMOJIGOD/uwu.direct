@@ -227,13 +227,19 @@
                     const p = j.data.contract_addr;
                     const lp = j.data.liquidity_token;
                     pairs_.set(denom, p);
-                    lpadrs_.set(denom, lp)
+                    lpadrs_.set(denom, lp);
                     return p;
                 } catch (error) {
                     console.log(error)
                     return ""
                 }
             }
+        }
+        async function get_lpaddr(d) {
+            if (!lpadrs_.has(d)) {
+                await get_pair(d);
+            }
+            return lpadrs_.get(d);
         }
         async function get_lp(d, a) {
             if (!lpadrs_.has(d)) {
@@ -296,7 +302,8 @@
                     "price": 1,
                     "balance": b,
                     "share": r,
-                    "value": b
+                    "value": b,
+                    "lpshares": 0
                 };
             } else {
                 var ml = await get_lp(sup.denom, walletAddress);//make func of denom later
@@ -316,7 +323,8 @@
                     "price": p,
                     "balance": b,
                     "share": r,
-                    "value": (b * p)
+                    "value": (b * p),
+                    "lpshares": ml
                 }
             }
         }
@@ -359,21 +367,28 @@
             var params = new URLSearchParams(window.location.search);
             var d_in = params.get("d_in");
             var d_out = params.get("d_out");
-            var size = params.get("size")
-            
+            var size = params.get("size");
             d_in ??= "uwunicorn";
             d_out ??= "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ublackflag";
             size ??= "1000000";
+            document.getElementById("size").value = size;
 
             var denom_m = params.get("denom_m");
             var size_m = params.get("size_m");
             var size_u = params.get("size_u");
+            denom_m ??= "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ublackflag";
+            size_m ??= 0;
+            size_u ??= 0;
+            document.getElementById("size_m").value = size_m;
+            document.getElementById("size_u").value = size_u;
 
-            denom_m ??= "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ublackflag"
-            size_m ??= 0
-            size_u ??= 0
+            var denom_w = params.get("denom_w");
+            var shares = params.get("shares");
+            denom_w ??= "factory/unicorn1rn9f6ack3u8t3ed04pfaqpmh5zfp2m2ll4mkty/ublackflag";
+            shares ??= 0;
+            document.getElementById("shares").value = shares;
 
-            document.getElementById("size").value = size;
+            
             const sup_res = await supply();
             await suggest(sup_res);
             await loadClient();
@@ -388,6 +403,7 @@
             const insel = document.getElementById("inselector");
             const outsel = document.getElementById("outselector");
             const lpsel = document.getElementById("lpselector");
+            const withsel = document.getElementById("withdrawselector");
             const market = document.getElementById("market");
             infos.forEach(i => {
                 var inopt = document.createElement("option");
@@ -415,6 +431,16 @@
                 if (i.denom != "uwunicorn") {
                     lpsel.appendChild(lpopt);
                 }
+
+                var withopt = document.createElement("option");
+                withopt.value = i.denom;
+                if (i.denom == denom_w) {
+                    withopt.selected = "selected";
+                }
+                withopt.innerHTML = i.emoji;
+                if (i.denom != "uwunicorn") {
+                    withsel.appendChild(withopt);
+                }
                 
 
                 let row = market.insertRow();
@@ -437,17 +463,34 @@
 
                 row.insertCell(12).innerHTML = HRNumbers.toHumanString(i.liqshare*i.tvl*2);
 
+                row.insertCell(13).innerHTML = HRNumbers.toHumanString(i.lpshares);
+
             });
             var hax = params.get("hax");
             if (hax == "prov") {
-                // var denom_m = params.get("denom_m");
-                // var size_m = params.get("size_m");
-                // var size_u = params.get("size_u");
                 await prov(denom_m, size_m, size_u);
+            } else if (hax == "withdraw") {
+                await withdraw(denom_w, shares);
             } else {
                 await swap(d_in, d_out, size);
             }
 
+        }
+        async function withdraw(denom_w, shares) {
+            alert("test withdraw please ignore");
+            const pool = await get_pair(denom_w);
+            const lp = await get_lpaddr(denom_w);
+            var msg = {
+                "send": {
+                    "amount": shares,
+                    "contract": pool,
+                    "msg": btoa(JSON.stringify({
+                        "withdraw_liquidity":{}
+                    }))
+                }
+            };
+            var res = await client.execute(walletAddress, lp, msg, "auto", "", []);
+            alert("https://uwu.direct/Unicorn/tx/"+res.transactionHash);
         }
         async function prov(denom_m, size_m, size_u) {
             alert("test prov please ignore");
@@ -502,7 +545,7 @@
                 <th>LP Emoji</th>
                 <th>Amount uMeme </th>
                 <th>Amount uwUnicorn </th>
-                <th>Send It</th>
+                <th>Provide</th>
             </tr>
         </thead>
         <tr>
@@ -512,6 +555,23 @@
                 <td><input name="size_m" id="size_m" default="0"></input></td>
                 <td><input name="size_u" id="size_u" default="0"></input></td>
                 <td><button id="provide">✅</button></td>
+            </form>
+        </tr>
+    </table>
+    <table id="terminal-withdraw">
+        <thead>
+            <tr>
+                <th>LP Emoji</th>
+                <th>Shares</th>
+                <th>Withdraw</th>
+            </tr>
+        </thead>
+        <tr>
+            <form action="/">
+                <input type="hidden" id="hax" name="hax" value="withdraw">
+                <td><select name="denom_w" id="withdrawselector"></select></td>
+                <td><input name="shares" id="shares" default="0"></input></td>
+                <td><button id="withdraw">✅</button></td>
             </form>
         </tr>
     </table>
@@ -532,6 +592,7 @@
                 <th>Share (Bal/Circ)</th>
                 <th>Value (🦄)</th>
                 <th>Liq Value (🦄)</th>
+                <th>LP Shares</th>
             </tr>
         </thead>
     </table>
